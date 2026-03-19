@@ -14,10 +14,10 @@ class ProductListScreen extends StatefulWidget {
   final Function(int)? onProductSelected;
 
   const ProductListScreen({
-    Key? key,
+    super.key,
     this.isResponsive = false,
     this.onProductSelected,
-  }) : super(key: key);
+  }) : super();
 
   @override
   State<ProductListScreen> createState() => _ProductListScreenState();
@@ -36,9 +36,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
     _scrollController.addListener(_onScroll);
 
     // Fetch initial data
-    context.read<ProductsBloc>().add(
-          const FetchProductsEvent(isInitial: true),
-        );
+    context.read<ProductsBloc>().add(const FetchProductsEvent(isInitial: true));
     context.read<CategoriesCubit>().fetchCategories();
   }
 
@@ -53,46 +51,42 @@ class _ProductListScreenState extends State<ProductListScreen> {
     if (_scrollController.position.pixels >=
         _scrollController.position.maxScrollExtent - 500) {
       context.read<ProductsBloc>().add(
-            LoadMoreProductsEvent(
-              categoryFilter: _selectedCategory,
-              searchQuery: _searchController.text,
-            ),
-          );
+        LoadMoreProductsEvent(
+          categoryFilter: _selectedCategory,
+          searchQuery: _searchController.text,
+        ),
+      );
     }
   }
 
   void _handleSearch(String query) {
     context.read<ProductsBloc>().add(
-          FetchProductsEvent(
-            searchQuery: query,
-            categoryFilter: _selectedCategory,
-            isInitial: true,
-          ),
-        );
+      FetchProductsEvent(
+        searchQuery: query,
+        categoryFilter: _selectedCategory,
+        isInitial: true,
+      ),
+    );
   }
 
   void _handleCategorySelect(String category) {
     setState(() {
-      _selectedCategory =
-          _selectedCategory == category ? null : category;
+      _selectedCategory = _selectedCategory == category ? null : category;
     });
 
     context.read<ProductsBloc>().add(
-          FetchProductsEvent(
-            categoryFilter: _selectedCategory,
-            searchQuery: _searchController.text,
-            isInitial: true,
-          ),
-        );
+      FetchProductsEvent(
+        categoryFilter: _selectedCategory,
+        searchQuery: _searchController.text,
+        isInitial: true,
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Products'),
-        centerTitle: false,
-      ),
+      appBar: AppBar(title: const Text('Products'), centerTitle: false),
       body: Column(
         children: [
           Padding(
@@ -147,7 +141,9 @@ class _ProductListScreenState extends State<ProductListScreen> {
                   return const LoadingIndicator(message: 'Loading products...');
                 } else if (state is ProductsLoading) {
                   if (state.previousProducts.isEmpty) {
-                    return const LoadingIndicator(message: 'Loading products...');
+                    return const LoadingIndicator(
+                      message: 'Loading products...',
+                    );
                   }
                   return _buildProductList(
                     context,
@@ -168,12 +164,12 @@ class _ProductListScreenState extends State<ProductListScreen> {
                     title: 'Error loading products',
                     onRetry: () {
                       context.read<ProductsBloc>().add(
-                            FetchProductsEvent(
-                              categoryFilter: _selectedCategory,
-                              searchQuery: _searchController.text,
-                              isInitial: true,
-                            ),
-                          );
+                        FetchProductsEvent(
+                          categoryFilter: _selectedCategory,
+                          searchQuery: _searchController.text,
+                          isInitial: true,
+                        ),
+                      );
                     },
                   );
                 }

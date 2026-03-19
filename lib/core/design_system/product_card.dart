@@ -13,7 +13,7 @@ class ProductCard extends StatefulWidget {
   final bool isLoading;
 
   const ProductCard({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.title,
     required this.brand,
@@ -23,7 +23,7 @@ class ProductCard extends StatefulWidget {
     required this.reviewCount,
     required this.onTap,
     this.isLoading = false,
-  }) : super(key: key);
+  });
 
   @override
   State<ProductCard> createState() => _ProductCardState();
@@ -73,14 +73,10 @@ class _ProductCardState extends State<ProductCard> {
                       ),
                       child: Text(
                         '-${widget.discountPercentage!.toStringAsFixed(0)}%',
-                        style: Theme.of(context)
-                            .textTheme
-                            .labelSmall
-                            ?.copyWith(
-                              color:
-                                  Theme.of(context).colorScheme.onError,
-                              fontWeight: FontWeight.bold,
-                            ),
+                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                          color: Theme.of(context).colorScheme.onError,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
@@ -96,10 +92,8 @@ class _ProductCardState extends State<ProductCard> {
                     Text(
                       widget.brand,
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onSurfaceVariant,
-                          ),
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -123,13 +117,11 @@ class _ProductCardState extends State<ProductCard> {
                         const SizedBox(width: 4),
                         Text(
                           '${widget.rating.toStringAsFixed(1)} (${widget.reviewCount})',
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelSmall
+                          style: Theme.of(context).textTheme.labelSmall
                               ?.copyWith(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onSurfaceVariant,
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurfaceVariant,
                               ),
                         ),
                       ],
@@ -144,13 +136,11 @@ class _ProductCardState extends State<ProductCard> {
                             children: [
                               Text(
                                 '\$${widget.price.toStringAsFixed(2)}',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
+                                style: Theme.of(context).textTheme.titleMedium
                                     ?.copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .primary,
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.primary,
                                       fontWeight: FontWeight.bold,
                                     ),
                               ),
@@ -193,7 +183,7 @@ class _ProductCardState extends State<ProductCard> {
           child: CircularProgressIndicator(
             value: loadingProgress.expectedTotalBytes != null
                 ? loadingProgress.cumulativeBytesLoaded /
-                    loadingProgress.expectedTotalBytes!
+                      loadingProgress.expectedTotalBytes!
                 : null,
           ),
         );
@@ -224,13 +214,21 @@ class _ProductCardState extends State<ProductCard> {
                 children: [
                   _buildSkeletonBox(context, width: 60, height: 12),
                   const SizedBox(height: AppPadding.sm),
-                  _buildSkeletonBox(context, width: double.infinity, height: 16),
+                  _buildSkeletonBox(
+                    context,
+                    width: double.infinity,
+                    height: 16,
+                  ),
                   const SizedBox(height: 4),
                   _buildSkeletonBox(context, width: 200, height: 16),
                   const SizedBox(height: AppPadding.md),
                   _buildSkeletonBox(context, width: 100, height: 14),
                   const SizedBox(height: 12),
-                  _buildSkeletonBox(context, width: double.infinity, height: 18),
+                  _buildSkeletonBox(
+                    context,
+                    width: double.infinity,
+                    height: 18,
+                  ),
                 ],
               ),
             ),

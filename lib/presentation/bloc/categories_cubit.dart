@@ -53,7 +53,7 @@ class CategoriesCubit extends Cubit<CategoriesState> {
   final ProductRepository productRepository;
 
   CategoriesCubit({required this.productRepository})
-      : super(const CategoriesInitial());
+    : super(const CategoriesInitial());
 
   Future<void> fetchCategories() async {
     emit(const CategoriesLoading());

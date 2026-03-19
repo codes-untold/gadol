@@ -25,7 +25,8 @@ class ProductRepository {
         return ProductResponse.fromJson(json);
       } else {
         throw Exception(
-            'Failed to load products: ${response.statusCode} - ${response.reasonPhrase}');
+          'Failed to load products: ${response.statusCode} - ${response.reasonPhrase}',
+        );
       }
     } catch (e) {
       developer.log('Error fetching products: $e');
@@ -44,7 +45,9 @@ class ProductRepository {
     }
 
     try {
-      final uri = Uri.parse('$baseUrl/products/search?q=$query&limit=$limit&skip=$skip');
+      final uri = Uri.parse(
+        '$baseUrl/products/search?q=$query&limit=$limit&skip=$skip',
+      );
       developer.log('Searching products: $uri');
 
       final response = await httpClient.get(uri);
@@ -54,7 +57,8 @@ class ProductRepository {
         return ProductResponse.fromJson(json);
       } else {
         throw Exception(
-            'Failed to search products: ${response.statusCode} - ${response.reasonPhrase}');
+          'Failed to search products: ${response.statusCode} - ${response.reasonPhrase}',
+        );
       }
     } catch (e) {
       developer.log('Error searching products: $e');
@@ -75,7 +79,8 @@ class ProductRepository {
         return categories.map((c) => c.toString()).toList();
       } else {
         throw Exception(
-            'Failed to load categories: ${response.statusCode} - ${response.reasonPhrase}');
+          'Failed to load categories: ${response.statusCode} - ${response.reasonPhrase}',
+        );
       }
     } catch (e) {
       developer.log('Error fetching categories: $e');
@@ -91,7 +96,8 @@ class ProductRepository {
   }) async {
     try {
       final uri = Uri.parse(
-          '$baseUrl/products/category/$category?limit=$limit&skip=$skip');
+        '$baseUrl/products/category/$category?limit=$limit&skip=$skip',
+      );
       developer.log('Fetching products for category: $category from: $uri');
 
       final response = await httpClient.get(uri);
@@ -101,7 +107,8 @@ class ProductRepository {
         return ProductResponse.fromJson(json);
       } else {
         throw Exception(
-            'Failed to load products by category: ${response.statusCode} - ${response.reasonPhrase}');
+          'Failed to load products by category: ${response.statusCode} - ${response.reasonPhrase}',
+        );
       }
     } catch (e) {
       developer.log('Error fetching products by category: $e');
@@ -122,7 +129,8 @@ class ProductRepository {
         return Product.fromJson(json);
       } else {
         throw Exception(
-            'Failed to load product: ${response.statusCode} - ${response.reasonPhrase}');
+          'Failed to load product: ${response.statusCode} - ${response.reasonPhrase}',
+        );
       }
     } catch (e) {
       developer.log('Error fetching product by id: $e');

@@ -11,10 +11,10 @@ class ProductDetailScreen extends StatefulWidget {
   final bool isResponsive;
 
   const ProductDetailScreen({
-    Key? key,
+    super.key,
     required this.productId,
     this.isResponsive = false,
-  }) : super(key: key);
+  });
 
   @override
   State<ProductDetailScreen> createState() => _ProductDetailScreenState();
@@ -87,9 +87,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               child: Icon(
                                 Icons.image_not_supported,
                                 size: 48,
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onSurfaceVariant,
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurfaceVariant,
                               ),
                             ),
                           ),
@@ -107,8 +107,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       children: List.generate(
                         product.images.length,
                         (index) => Padding(
-                          padding:
-                              const EdgeInsets.symmetric(horizontal: 4),
+                          padding: const EdgeInsets.symmetric(horizontal: 4),
                           child: Container(
                             width: 8,
                             height: 8,
@@ -116,9 +115,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               shape: BoxShape.circle,
                               color: _currentImageIndex == index
                                   ? Theme.of(context).colorScheme.primary
-                                  : Theme.of(context)
-                                      .colorScheme
-                                      .surfaceVariant,
+                                  : Theme.of(
+                                      context,
+                                    ).colorScheme.surfaceVariant,
                             ),
                           ),
                         ),
@@ -136,21 +135,25 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           children: [
                             Chip(
                               label: Text(product.brand),
-                              backgroundColor:
-                                  Theme.of(context).colorScheme.primaryContainer,
+                              backgroundColor: Theme.of(
+                                context,
+                              ).colorScheme.primaryContainer,
                               labelStyle: TextStyle(
-                                color: Theme.of(context).colorScheme.onPrimaryContainer,
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onPrimaryContainer,
                               ),
                             ),
                             const SizedBox(width: AppPadding.sm),
                             Chip(
                               label: Text(product.category),
-                              backgroundColor:
-                                  Theme.of(context).colorScheme.secondaryContainer,
+                              backgroundColor: Theme.of(
+                                context,
+                              ).colorScheme.secondaryContainer,
                               labelStyle: TextStyle(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onSecondaryContainer,
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSecondaryContainer,
                               ),
                             ),
                           ],
@@ -159,8 +162,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         // Title
                         Text(
                           product.title,
-                          style:
-                              Theme.of(context).textTheme.headlineMedium,
+                          style: Theme.of(context).textTheme.headlineMedium,
                         ),
                         const SizedBox(height: AppPadding.md),
                         // Rating
@@ -168,34 +170,25 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           children: [
                             Icon(
                               Icons.star,
-                              color:
-                                  Theme.of(context).colorScheme.tertiary,
+                              color: Theme.of(context).colorScheme.tertiary,
                               size: 20,
                             ),
                             const SizedBox(width: 4),
                             Text(
                               product.rating.toStringAsFixed(1),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                              style: Theme.of(context).textTheme.titleMedium
+                                  ?.copyWith(fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(width: 16),
                             Text(
                               product.stock > 0
                                   ? '${product.stock} In Stock'
                                   : 'Out of Stock',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall
+                              style: Theme.of(context).textTheme.titleSmall
                                   ?.copyWith(
                                     color: product.stock > 0
                                         ? Colors.green
-                                        : Theme.of(context)
-                                            .colorScheme
-                                            .error,
+                                        : Theme.of(context).colorScheme.error,
                                   ),
                             ),
                           ],
@@ -205,9 +198,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         Container(
                           padding: const EdgeInsets.all(AppPadding.md),
                           decoration: BoxDecoration(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .primaryContainer,
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.primaryContainer,
                             borderRadius: BorderRadius.circular(AppRadius.md),
                           ),
                           child: Column(
@@ -215,9 +208,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             children: [
                               Text(
                                 'Price',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelSmall,
+                                style: Theme.of(context).textTheme.labelSmall,
                               ),
                               const SizedBox(height: 4),
                               Row(
@@ -228,32 +219,30 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                         .textTheme
                                         .displaySmall
                                         ?.copyWith(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary,
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.primary,
                                         ),
                                   ),
                                   if (product.discountPercentage > 0) ...[
                                     const SizedBox(width: AppPadding.md),
                                     Container(
-                                      padding:
-                                          const EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                         horizontal: AppPadding.sm,
                                         vertical: 4,
                                       ),
                                       decoration: BoxDecoration(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .error,
-                                        borderRadius:
-                                            BorderRadius.circular(4),
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.error,
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                       child: Text(
                                         '-${product.discountPercentage.toStringAsFixed(0)}%',
                                         style: TextStyle(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onError,
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.onError,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
@@ -268,8 +257,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         // Description
                         Text(
                           'Description',
-                          style:
-                              Theme.of(context).textTheme.titleMedium,
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
                         const SizedBox(height: AppPadding.sm),
                         Text(
@@ -307,9 +295,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               message: state.message,
               title: 'Error loading product',
               onRetry: () {
-                context
-                    .read<ProductDetailCubit>()
-                    .fetchProductDetail(widget.productId);
+                context.read<ProductDetailCubit>().fetchProductDetail(
+                  widget.productId,
+                );
               },
             ),
           );

@@ -59,7 +59,7 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
   final ProductRepository productRepository;
 
   ProductDetailCubit({required this.productRepository})
-      : super(const ProductDetailInitial());
+    : super(const ProductDetailInitial());
 
   Future<void> fetchProductDetail(int productId) async {
     emit(const ProductDetailLoading());

@@ -40,10 +40,13 @@ class Product {
     try {
       final price = (json['price'] as num?)?.toDouble() ?? 0.0;
       if (price < 0) {
-        developer.log('Negative price detected for product ${json['id']}: $price');
+        developer.log(
+          'Negative price detected for product ${json['id']}: $price',
+        );
       }
 
-      final images = (json['images'] as List<dynamic>?)
+      final images =
+          (json['images'] as List<dynamic>?)
               ?.map((e) => sanitizeImageUrl(e.toString()))
               .toList() ??
           [];
@@ -72,18 +75,18 @@ class Product {
 
   /// Convert Product to JSON
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'title': title,
-        'description': description,
-        'price': price,
-        'discountPercentage': discountPercentage,
-        'rating': rating,
-        'stock': stock,
-        'brand': brand,
-        'category': category,
-        'thumbnail': thumbnail,
-        'images': images,
-      };
+    'id': id,
+    'title': title,
+    'description': description,
+    'price': price,
+    'discountPercentage': discountPercentage,
+    'rating': rating,
+    'stock': stock,
+    'brand': brand,
+    'category': category,
+    'thumbnail': thumbnail,
+    'images': images,
+  };
 
   @override
   String toString() => 'Product(id: $id, title: $title, price: $price)';
@@ -104,7 +107,8 @@ class ProductResponse {
 
   factory ProductResponse.fromJson(Map<String, dynamic> json) {
     try {
-      final products = (json['products'] as List<dynamic>?)
+      final products =
+          (json['products'] as List<dynamic>?)
               ?.map((p) => Product.fromJson(p as Map<String, dynamic>))
               .toList() ??
           [];

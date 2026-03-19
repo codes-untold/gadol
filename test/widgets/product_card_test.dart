@@ -33,43 +33,44 @@ void main() {
       );
     }
 
-    testWidgets('should display product title, brand, and price',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(createWidgetUnderTest(
-        title: 'iPhone 14',
-        brand: 'Apple',
-        price: 999.99,
-      ));
+    testWidgets('should display product title, brand, and price', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(
+        createWidgetUnderTest(
+          title: 'iPhone 14',
+          brand: 'Apple',
+          price: 999.99,
+        ),
+      );
 
       expect(find.text('iPhone 14'), findsOneWidget);
       expect(find.text('Apple'), findsOneWidget);
       expect(find.text('\$999.99'), findsOneWidget);
     });
 
-    testWidgets('should display discount badge when discount exists',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(createWidgetUnderTest(
-        discountPercentage: 20.0,
-      ));
+    testWidgets('should display discount badge when discount exists', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(createWidgetUnderTest(discountPercentage: 20.0));
 
       expect(find.text('-20%'), findsOneWidget);
     });
 
-    testWidgets('should not display discount badge when discount is 0',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(createWidgetUnderTest(
-        discountPercentage: 0.0,
-      ));
+    testWidgets('should not display discount badge when discount is 0', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(createWidgetUnderTest(discountPercentage: 0.0));
 
       expect(find.text('-0%'), findsNothing);
     });
 
-    testWidgets('should display rating and review count',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(createWidgetUnderTest(
-        rating: 4.5,
-        reviewCount: 250,
-      ));
+    testWidgets('should display rating and review count', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(
+        createWidgetUnderTest(rating: 4.5, reviewCount: 250),
+      );
 
       expect(find.text('4.5 (250)'), findsOneWidget);
     });
@@ -102,8 +103,9 @@ void main() {
       expect(tapped, true);
     });
 
-    testWidgets('should display skeleton loader when isLoading is true',
-        (WidgetTester tester) async {
+    testWidgets('should display skeleton loader when isLoading is true', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(createWidgetUnderTest(isLoading: true));
 
       // The skeleton loader should be rendered without any content
@@ -112,15 +114,17 @@ void main() {
       expect(find.text('Test Product'), findsNothing);
     });
 
-    testWidgets('should display star icon with rating',
-        (WidgetTester tester) async {
+    testWidgets('should display star icon with rating', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(createWidgetUnderTest(rating: 4.5));
 
       expect(find.byIcon(Icons.star), findsOneWidget);
     });
 
-    testWidgets('should truncate long product titles to 2 lines',
-        (WidgetTester tester) async {
+    testWidgets('should truncate long product titles to 2 lines', (
+      WidgetTester tester,
+    ) async {
       const longTitle =
           'This is a very long product title that should be truncated after two lines';
 

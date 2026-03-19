@@ -30,23 +30,23 @@ void main() {
       expect(find.text('Electronics'), findsOneWidget);
     });
 
-    testWidgets('should have primary color when selected',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(createWidgetUnderTest(
-        label: 'Electronics',
-        isSelected: true,
-      ));
+    testWidgets('should have primary color when selected', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(
+        createWidgetUnderTest(label: 'Electronics', isSelected: true),
+      );
 
       final container = find.byType(Container).first;
       expect(container, findsOneWidget);
     });
 
-    testWidgets('should have surfaceVariant color when not selected',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(createWidgetUnderTest(
-        label: 'Electronics',
-        isSelected: false,
-      ));
+    testWidgets('should have surfaceVariant color when not selected', (
+      WidgetTester tester,
+    ) async {
+      await tester.pumpWidget(
+        createWidgetUnderTest(label: 'Electronics', isSelected: false),
+      );
 
       final container = find.byType(Container).first;
       expect(container, findsOneWidget);
@@ -55,12 +55,14 @@ void main() {
     testWidgets('should call onTap when tapped', (WidgetTester tester) async {
       bool tapped = false;
 
-      await tester.pumpWidget(createWidgetUnderTest(
-        label: 'Electronics',
-        onTap: () {
-          tapped = true;
-        },
-      ));
+      await tester.pumpWidget(
+        createWidgetUnderTest(
+          label: 'Electronics',
+          onTap: () {
+            tapped = true;
+          },
+        ),
+      );
 
       await tester.tap(find.byType(CategoryChip));
       await tester.pumpAndSettle();
@@ -68,8 +70,9 @@ void main() {
       expect(tapped, true);
     });
 
-    testWidgets('should toggle selection state when tapped',
-        (WidgetTester tester) async {
+    testWidgets('should toggle selection state when tapped', (
+      WidgetTester tester,
+    ) async {
       bool isSelected = false;
 
       await tester.pumpWidget(
@@ -103,8 +106,9 @@ void main() {
       expect(isSelected, true);
     });
 
-    testWidgets('should display multiple chips in a row',
-        (WidgetTester tester) async {
+    testWidgets('should display multiple chips in a row', (
+      WidgetTester tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           theme: AppTheme.lightTheme,
@@ -123,11 +127,7 @@ void main() {
                     isSelected: true,
                     onTap: () {},
                   ),
-                  CategoryChip(
-                    label: 'Books',
-                    isSelected: false,
-                    onTap: () {},
-                  ),
+                  CategoryChip(label: 'Books', isSelected: false, onTap: () {}),
                 ],
               ),
             ),

@@ -12,8 +12,9 @@ void main() {
 
     setUp(() {
       mockProductRepository = MockProductRepository();
-      productDetailCubit =
-          ProductDetailCubit(productRepository: mockProductRepository);
+      productDetailCubit = ProductDetailCubit(
+        productRepository: mockProductRepository,
+      );
     });
 
     tearDown(() {
@@ -37,8 +38,9 @@ void main() {
     blocTest<ProductDetailCubit, ProductDetailState>(
       'should emit [ProductDetailLoading, ProductDetailLoaded] when fetch succeeds',
       build: () {
-        when(() => mockProductRepository.getProductById(id: 1))
-            .thenAnswer((_) async => mockProduct);
+        when(
+          () => mockProductRepository.getProductById(id: 1),
+        ).thenAnswer((_) async => mockProduct);
         return productDetailCubit;
       },
       act: (cubit) => cubit.fetchProductDetail(1),
@@ -46,22 +48,24 @@ void main() {
         isA<ProductDetailLoading>(),
         isA<ProductDetailLoaded>()
             .having((state) => state.product.id, 'product id', 1)
-            .having((state) => state.product.title, 'product title', 'Test Product'),
+            .having(
+              (state) => state.product.title,
+              'product title',
+              'Test Product',
+            ),
       ],
     );
 
     blocTest<ProductDetailCubit, ProductDetailState>(
       'should emit ProductDetailError when fetch fails',
       build: () {
-        when(() => mockProductRepository.getProductById(id: 1))
-            .thenThrow(Exception('Product not found'));
+        when(
+          () => mockProductRepository.getProductById(id: 1),
+        ).thenThrow(Exception('Product not found'));
         return productDetailCubit;
       },
       act: (cubit) => cubit.fetchProductDetail(1),
-      expect: () => [
-        isA<ProductDetailLoading>(),
-        isA<ProductDetailError>(),
-      ],
+      expect: () => [isA<ProductDetailLoading>(), isA<ProductDetailError>()],
     );
   });
 }

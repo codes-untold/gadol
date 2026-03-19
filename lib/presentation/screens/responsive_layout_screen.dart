@@ -5,7 +5,7 @@ import 'product_list_screen.dart';
 import 'product_detail_screen.dart';
 
 class ResponsiveLayoutScreen extends StatefulWidget {
-  const ResponsiveLayoutScreen({Key? key}) : super(key: key);
+  const ResponsiveLayoutScreen({super.key});
 
   @override
   State<ResponsiveLayoutScreen> createState() => _ResponsiveLayoutScreenState();
@@ -17,10 +17,7 @@ class _ResponsiveLayoutScreenState extends State<ResponsiveLayoutScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Product Catalog'),
-        centerTitle: false,
-      ),
+      appBar: AppBar(title: const Text('Product Catalog'), centerTitle: false),
       body: Row(
         children: [
           // Left panel: Product list
@@ -32,9 +29,9 @@ class _ResponsiveLayoutScreenState extends State<ResponsiveLayoutScreen> {
                 setState(() {
                   _selectedProductId = productId;
                 });
-                context
-                    .read<ProductDetailCubit>()
-                    .fetchProductDetail(productId);
+                context.read<ProductDetailCubit>().fetchProductDetail(
+                  productId,
+                );
               },
             ),
           ),
@@ -57,25 +54,21 @@ class _ResponsiveLayoutScreenState extends State<ResponsiveLayoutScreen> {
                         Icon(
                           Icons.shopping_bag_outlined,
                           size: 64,
-                          color:
-                              Theme.of(context).colorScheme.outline,
+                          color: Theme.of(context).colorScheme.outline,
                         ),
                         const SizedBox(height: 16),
                         Text(
                           'Select a product',
-                          style:
-                              Theme.of(context).textTheme.headlineSmall,
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         const SizedBox(height: 8),
                         Text(
                           'Choose a product from the list to view details',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
+                          style: Theme.of(context).textTheme.bodyMedium
                               ?.copyWith(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onSurfaceVariant,
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurfaceVariant,
                               ),
                           textAlign: TextAlign.center,
                         ),

@@ -7,11 +7,11 @@ class ErrorState extends StatelessWidget {
   final String? title;
 
   const ErrorState({
-    Key? key,
+    super.key,
     required this.message,
     required this.onRetry,
     this.title,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +31,8 @@ class ErrorState extends StatelessWidget {
               Text(
                 title!,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: Theme.of(context).colorScheme.error,
-                    ),
+                  color: Theme.of(context).colorScheme.error,
+                ),
                 textAlign: TextAlign.center,
               ),
             if (title != null) const SizedBox(height: AppPadding.md),
@@ -60,11 +60,11 @@ class EmptyState extends StatelessWidget {
   final IconData icon;
 
   const EmptyState({
-    Key? key,
+    super.key,
     required this.message,
     this.title,
     this.icon = Icons.shopping_bag_outlined,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -74,11 +74,7 @@ class EmptyState extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              icon,
-              size: 64,
-              color: Theme.of(context).colorScheme.outline,
-            ),
+            Icon(icon, size: 64, color: Theme.of(context).colorScheme.outline),
             const SizedBox(height: AppPadding.lg),
             if (title != null)
               Text(
@@ -90,8 +86,8 @@ class EmptyState extends StatelessWidget {
             Text(
               message,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
               textAlign: TextAlign.center,
             ),
           ],
@@ -105,9 +101,9 @@ class LoadingIndicator extends StatelessWidget {
   final String? message;
 
   const LoadingIndicator({
-    Key? key,
+    super.key,
     this.message,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -120,10 +116,7 @@ class LoadingIndicator extends StatelessWidget {
           ),
           if (message != null) ...[
             const SizedBox(height: AppPadding.md),
-            Text(
-              message!,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
+            Text(message!, style: Theme.of(context).textTheme.bodyMedium),
           ],
         ],
       ),

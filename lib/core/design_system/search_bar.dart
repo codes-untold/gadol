@@ -8,12 +8,12 @@ class AppSearchBar extends StatelessWidget {
   final VoidCallback? onClear;
 
   const AppSearchBar({
-    Key? key,
+    super.key,
     required this.controller,
     this.placeholder = 'Search products...',
     required this.onChanged,
     this.onClear,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

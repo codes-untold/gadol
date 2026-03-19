@@ -30,10 +30,7 @@ class LoadMoreProductsEvent extends ProductsEvent {
   final String? categoryFilter;
   final String? searchQuery;
 
-  const LoadMoreProductsEvent({
-    this.categoryFilter,
-    this.searchQuery,
-  });
+  const LoadMoreProductsEvent({this.categoryFilter, this.searchQuery});
 
   @override
   List<Object?> get props => [categoryFilter, searchQuery];
@@ -92,7 +89,12 @@ class ProductsLoaded extends ProductsState {
   });
 
   @override
-  List<Object?> get props => [products, hasMoreData, categoryFilter, searchQuery];
+  List<Object?> get props => [
+    products,
+    hasMoreData,
+    categoryFilter,
+    searchQuery,
+  ];
 }
 
 class ProductsError extends ProductsState {
@@ -126,7 +128,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   int _totalProducts = 0;
 
   ProductsBloc({required this.productRepository})
-      : super(const ProductsInitial()) {
+    : super(const ProductsInitial()) {
     on<FetchProductsEvent>(_onFetchProducts);
     on<LoadMoreProductsEvent>(_onLoadMoreProducts);
     on<UpdateCategoryFilterEvent>(_onUpdateCategoryFilter);
@@ -156,18 +158,22 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       _totalProducts = response.total;
 
       if (_allProducts.isEmpty) {
-        emit(ProductsEmpty(
-          categoryFilter: event.categoryFilter,
-          searchQuery: event.searchQuery,
-        ));
+        emit(
+          ProductsEmpty(
+            categoryFilter: event.categoryFilter,
+            searchQuery: event.searchQuery,
+          ),
+        );
       } else {
         _currentSkip = pageSize;
-        emit(ProductsLoaded(
-          products: _allProducts,
-          hasMoreData: _allProducts.length < _totalProducts,
-          categoryFilter: event.categoryFilter,
-          searchQuery: event.searchQuery,
-        ));
+        emit(
+          ProductsLoaded(
+            products: _allProducts,
+            hasMoreData: _allProducts.length < _totalProducts,
+            categoryFilter: event.categoryFilter,
+            searchQuery: event.searchQuery,
+          ),
+        );
       }
     } catch (e) {
       emit(ProductsError(e.toString()));
@@ -194,12 +200,14 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
 
       final hasMore = _allProducts.length < _totalProducts;
 
-      emit(ProductsLoaded(
-        products: _allProducts,
-        hasMoreData: hasMore,
-        categoryFilter: event.categoryFilter,
-        searchQuery: event.searchQuery,
-      ));
+      emit(
+        ProductsLoaded(
+          products: _allProducts,
+          hasMoreData: hasMore,
+          categoryFilter: event.categoryFilter,
+          searchQuery: event.searchQuery,
+        ),
+      );
 
       if (hasMore) {
         _currentSkip += pageSize;
@@ -213,22 +221,26 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     UpdateCategoryFilterEvent event,
     Emitter<ProductsState> emit,
   ) async {
-    add(FetchProductsEvent(
-      categoryFilter: event.category,
-      searchQuery: _currentSearchQuery,
-      isInitial: true,
-    ));
+    add(
+      FetchProductsEvent(
+        categoryFilter: event.category,
+        searchQuery: _currentSearchQuery,
+        isInitial: true,
+      ),
+    );
   }
 
   Future<void> _onUpdateSearchQuery(
     UpdateSearchQueryEvent event,
     Emitter<ProductsState> emit,
   ) async {
-    add(FetchProductsEvent(
-      categoryFilter: _currentCategory,
-      searchQuery: event.query,
-      isInitial: true,
-    ));
+    add(
+      FetchProductsEvent(
+        categoryFilter: _currentCategory,
+        searchQuery: event.query,
+        isInitial: true,
+      ),
+    );
   }
 
   Future<ProductResponse> _fetchProductsWithFilters({
@@ -250,10 +262,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
         skip: skip,
       );
     } else {
-      return productRepository.getProducts(
-        limit: limit,
-        skip: skip,
-      );
+      return productRepository.getProducts(limit: limit, skip: skip);
     }
   }
 }

@@ -13,7 +13,7 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) {
         final screenSize = MediaQuery.of(context).size.width;
         const tabletBreakpoint = 768.0;
-        
+
         if (screenSize >= tabletBreakpoint) {
           return const ResponsiveLayoutScreen();
         } else {
@@ -27,7 +27,7 @@ final GoRouter appRouter = GoRouter(
             final id = int.parse(state.pathParameters['id'] ?? '0');
             final screenSize = MediaQuery.of(context).size.width;
             const tabletBreakpoint = 768.0;
-            
+
             if (screenSize >= tabletBreakpoint) {
               // On tablet, let the parent handle it
               return const ResponsiveLayoutScreen();

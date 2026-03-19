@@ -15,7 +15,10 @@ void main() {
         'brand': 'Test Brand',
         'category': 'Test Category',
         'thumbnail': 'https://example.com/image.jpg',
-        'images': ['https://example.com/image1.jpg', 'https://example.com/image2.jpg'],
+        'images': [
+          'https://example.com/image1.jpg',
+          'https://example.com/image2.jpg',
+        ],
       };
 
       final product = Product.fromJson(json);
@@ -29,10 +32,7 @@ void main() {
     });
 
     test('should provide default values for missing fields', () {
-      final json = {
-        'id': 1,
-        'thumbnail': 'https://example.com/image.jpg',
-      };
+      final json = {'id': 1, 'thumbnail': 'https://example.com/image.jpg'};
 
       final product = Product.fromJson(json);
 
@@ -138,12 +138,7 @@ void main() {
     });
 
     test('ProductResponse should handle empty products list', () {
-      final json = {
-        'products': [],
-        'total': 0,
-        'skip': 0,
-        'limit': 20,
-      };
+      final json = {'products': [], 'total': 0, 'skip': 0, 'limit': 20};
 
       final response = ProductResponse.fromJson(json);
 

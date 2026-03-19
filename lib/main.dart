@@ -17,26 +17,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final productRepository = ProductRepository(
-      httpClient: http.Client(),
-    );
+    final productRepository = ProductRepository(httpClient: http.Client());
 
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => ProductsBloc(
-            productRepository: productRepository,
-          ),
+          create: (context) =>
+              ProductsBloc(productRepository: productRepository),
         ),
         BlocProvider(
-          create: (context) => CategoriesCubit(
-            productRepository: productRepository,
-          ),
+          create: (context) =>
+              CategoriesCubit(productRepository: productRepository),
         ),
         BlocProvider(
-          create: (context) => ProductDetailCubit(
-            productRepository: productRepository,
-          ),
+          create: (context) =>
+              ProductDetailCubit(productRepository: productRepository),
         ),
       ],
       child: MaterialApp.router(

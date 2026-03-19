@@ -11,7 +11,9 @@ void main() {
 
     setUp(() {
       mockProductRepository = MockProductRepository();
-      categoriesCubit = CategoriesCubit(productRepository: mockProductRepository);
+      categoriesCubit = CategoriesCubit(
+        productRepository: mockProductRepository,
+      );
     });
 
     tearDown(() {
@@ -23,30 +25,32 @@ void main() {
     blocTest<CategoriesCubit, CategoriesState>(
       'should emit [CategoriesLoading, CategoriesLoaded] when fetch succeeds',
       build: () {
-        when(() => mockProductRepository.getCategories())
-            .thenAnswer((_) async => mockCategories);
+        when(
+          () => mockProductRepository.getCategories(),
+        ).thenAnswer((_) async => mockCategories);
         return categoriesCubit;
       },
       act: (cubit) => cubit.fetchCategories(),
       expect: () => [
         isA<CategoriesLoading>(),
-        isA<CategoriesLoaded>()
-            .having((state) => state.categories.length, 'categories length', 4),
+        isA<CategoriesLoaded>().having(
+          (state) => state.categories.length,
+          'categories length',
+          4,
+        ),
       ],
     );
 
     blocTest<CategoriesCubit, CategoriesState>(
       'should emit CategoriesError when fetch fails',
       build: () {
-        when(() => mockProductRepository.getCategories())
-            .thenThrow(Exception('Network error'));
+        when(
+          () => mockProductRepository.getCategories(),
+        ).thenThrow(Exception('Network error'));
         return categoriesCubit;
       },
       act: (cubit) => cubit.fetchCategories(),
-      expect: () => [
-        isA<CategoriesLoading>(),
-        isA<CategoriesError>(),
-      ],
+      expect: () => [isA<CategoriesLoading>(), isA<CategoriesError>()],
     );
   });
 }
