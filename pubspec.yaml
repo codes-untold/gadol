@@ -63,6 +63,10 @@ dev_dependencies:
   # JSON code generation
   json_serializable: ^6.7.1
   build_runner: ^2.4.6
+  
+  # Testing
+  bloc_test: ^9.1.0
+  mocktail: ^1.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
