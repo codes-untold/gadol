@@ -100,7 +100,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
             builder: (context, state) {
               if (state is CategoriesLoaded) {
                 return SizedBox(
-                  height: 50,
+                  height: 35,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     padding: const EdgeInsets.symmetric(

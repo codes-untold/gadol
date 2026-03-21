@@ -1,7 +1,7 @@
 import 'dart:developer' as developer;
+import 'package:gadol/data/models/product.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'product.dart';
 
 class ProductRepository {
   static const String baseUrl = 'https://dummyjson.com';
@@ -76,7 +76,7 @@ class ProductRepository {
 
       if (response.statusCode == 200) {
         final categories = jsonDecode(response.body) as List<dynamic>;
-        return categories.map((c) => c.toString()).toList();
+        return categories.map((c) => c['name'].toString()).toList();
       } else {
         throw Exception(
           'Failed to load categories: ${response.statusCode} - ${response.reasonPhrase}',

@@ -22,7 +22,7 @@ class AppTheme {
           color: Colors.white,
         ),
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: _lightColorScheme.surface,
         elevation: 1,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -100,7 +100,7 @@ class AppTheme {
           color: Colors.white,
         ),
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: _darkColorScheme.surface,
         elevation: 1,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -188,7 +188,7 @@ class AppTheme {
     shadow: Color(0xFF000000),
     scrim: Color(0xFF000000),
     inverseSurface: Color(0xFF313033),
-    inverseOnSurface: Color(0xFFF5EFF7),
+    //    inverseOnSurface: Color(0xFFF5EFF7),
     inversePrimary: Color(0xFFD0BCFF),
   );
 
@@ -221,7 +221,7 @@ class AppTheme {
     shadow: Color(0xFF000000),
     scrim: Color(0xFF000000),
     inverseSurface: Color(0xFFE6E1E6),
-    inverseOnSurface: Color(0xFF1C1B1F),
+    // inverseOnSurface: Color(0xFF1C1B1F),
     inversePrimary: Color(0xFF6200EA),
   );
 
