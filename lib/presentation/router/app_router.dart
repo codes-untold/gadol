@@ -29,8 +29,8 @@ final GoRouter appRouter = GoRouter(
             const tabletBreakpoint = 768.0;
 
             if (screenSize >= tabletBreakpoint) {
-              // On tablet, let the parent handle it
-              return const ResponsiveLayoutScreen();
+              // On tablet, show responsive layout with the selected product
+              return ResponsiveLayoutScreen(initialProductId: id);
             } else {
               // On phone, show detail screen
               return ProductDetailScreen(productId: id);

@@ -5,7 +5,9 @@ import 'product_list_screen.dart';
 import 'product_detail_screen.dart';
 
 class ResponsiveLayoutScreen extends StatefulWidget {
-  const ResponsiveLayoutScreen({super.key});
+  final int? initialProductId;
+
+  const ResponsiveLayoutScreen({super.key, this.initialProductId});
 
   @override
   State<ResponsiveLayoutScreen> createState() => _ResponsiveLayoutScreenState();
@@ -13,6 +15,20 @@ class ResponsiveLayoutScreen extends StatefulWidget {
 
 class _ResponsiveLayoutScreenState extends State<ResponsiveLayoutScreen> {
   int? _selectedProductId;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.initialProductId != null) {
+      _selectedProductId = widget.initialProductId;
+      // Fetch the product detail for the initial product
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        context.read<ProductDetailCubit>().fetchProductDetail(
+          widget.initialProductId!,
+        );
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
