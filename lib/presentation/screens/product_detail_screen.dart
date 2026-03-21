@@ -42,15 +42,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     return BlocBuilder<ProductDetailCubit, ProductDetailState>(
       builder: (context, state) {
         if (state is ProductDetailInitial) {
-          return _buildScaffold(
-            context,
-            body: const LoadingIndicator(message: 'Loading product...'),
-          );
+          return _buildScaffold(context, body: const ProductDetailShimmer());
         } else if (state is ProductDetailLoading) {
-          return _buildScaffold(
-            context,
-            body: const LoadingIndicator(message: 'Loading product...'),
-          );
+          return _buildScaffold(context, body: const ProductDetailShimmer());
         } else if (state is ProductDetailLoaded) {
           final product = state.product;
           return _buildScaffold(

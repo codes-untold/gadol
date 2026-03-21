@@ -138,12 +138,10 @@ class _ProductListScreenState extends State<ProductListScreen> {
             child: BlocBuilder<ProductsBloc, ProductsState>(
               builder: (context, state) {
                 if (state is ProductsInitial) {
-                  return const LoadingIndicator(message: 'Loading products...');
+                  return const ProductListShimmer();
                 } else if (state is ProductsLoading) {
                   if (state.previousProducts.isEmpty) {
-                    return const LoadingIndicator(
-                      message: 'Loading products...',
-                    );
+                    return const ProductListShimmer();
                   }
                   return _buildProductList(
                     context,
@@ -199,8 +197,12 @@ class _ProductListScreenState extends State<ProductListScreen> {
           if (index == products.length) {
             return Padding(
               padding: const EdgeInsets.all(AppPadding.lg),
-              child: CircularProgressIndicator(
-                color: Theme.of(context).colorScheme.primary,
+              child: Column(
+                children: [
+                  CircularProgressIndicator(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ],
               ),
             );
           }

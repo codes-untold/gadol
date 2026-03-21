@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import 'design_tokens.dart';
 
 class ErrorState extends StatelessWidget {
@@ -116,6 +117,143 @@ class LoadingIndicator extends StatelessWidget {
             Text(message!, style: Theme.of(context).textTheme.bodyMedium),
           ],
         ],
+      ),
+    );
+  }
+}
+
+class ProductListShimmer extends StatelessWidget {
+  final int count;
+
+  const ProductListShimmer({super.key, this.count = 6});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      padding: const EdgeInsets.all(AppPadding.md),
+      itemCount: count,
+      separatorBuilder: (_, __) => const SizedBox(height: AppPadding.md),
+      itemBuilder: (context, index) {
+        return Shimmer.fromColors(
+          baseColor: Theme.of(context).colorScheme.surfaceVariant,
+          highlightColor: Theme.of(context).colorScheme.surface,
+          child: Card(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: 150,
+                  color: Theme.of(context).colorScheme.surfaceVariant,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(AppPadding.md),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 12,
+                        width: 120,
+                        color: Theme.of(context).colorScheme.surfaceVariant,
+                      ),
+                      const SizedBox(height: AppPadding.sm),
+                      Container(
+                        height: 16,
+                        width: double.infinity,
+                        color: Theme.of(context).colorScheme.surfaceVariant,
+                      ),
+                      const SizedBox(height: AppPadding.sm),
+                      Container(
+                        height: 16,
+                        width: 180,
+                        color: Theme.of(context).colorScheme.surfaceVariant,
+                      ),
+                      const SizedBox(height: AppPadding.md),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            height: 20,
+                            width: 80,
+                            color: Theme.of(context).colorScheme.surfaceVariant,
+                          ),
+                          Container(
+                            height: 20,
+                            width: 20,
+                            color: Theme.of(context).colorScheme.surfaceVariant,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class ProductDetailShimmer extends StatelessWidget {
+  const ProductDetailShimmer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Shimmer.fromColors(
+        baseColor: Theme.of(context).colorScheme.surfaceVariant,
+        highlightColor: Theme.of(context).colorScheme.surface,
+        child: Padding(
+          padding: const EdgeInsets.all(AppPadding.lg),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: double.infinity,
+                height: 300,
+                color: Theme.of(context).colorScheme.surfaceVariant,
+              ),
+              const SizedBox(height: AppPadding.lg),
+              Container(
+                height: 20,
+                width: 160,
+                color: Theme.of(context).colorScheme.surfaceVariant,
+              ),
+              const SizedBox(height: AppPadding.sm),
+              Container(
+                height: 20,
+                width: 120,
+                color: Theme.of(context).colorScheme.surfaceVariant,
+              ),
+              const SizedBox(height: AppPadding.md),
+              Container(
+                height: 50,
+                width: 100,
+                color: Theme.of(context).colorScheme.surfaceVariant,
+              ),
+              const SizedBox(height: AppPadding.md),
+              Container(
+                height: 16,
+                width: double.infinity,
+                color: Theme.of(context).colorScheme.surfaceVariant,
+              ),
+              const SizedBox(height: AppPadding.sm),
+              Container(
+                height: 16,
+                width: double.infinity,
+                color: Theme.of(context).colorScheme.surfaceVariant,
+              ),
+              const SizedBox(height: AppPadding.sm),
+              Container(
+                height: 16,
+                width: 200,
+                color: Theme.of(context).colorScheme.surfaceVariant,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
